@@ -1,0 +1,296 @@
+<!-- zabox/order-tracking.html -->
+<!DOCTYPE html>
+<html lang="en" dir="auto" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking - Zabox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#000000',
+                            light: '#333333',
+                        },
+                        secondary: {
+                            DEFAULT: '#FFD700',
+                            light: '#FFE55C',
+                        },
+                    },
+                    fontFamily: {
+                        'sans': ['Cairo', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div class="max-w-md mx-auto bg-white dark:bg-primary min-h-screen relative overflow-hidden">
+        <!-- Header -->
+        <header class="bg-primary text-white p-4 shadow-md sticky top-0 z-40">
+            <div class="flex justify-between items-center">
+                <button onclick="window.history.back()" class="text-white">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold">Order Tracking</h1>
+                <div></div> <!-- Spacer for alignment -->
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="pb-20">
+            <div id="orderTrackingContainer" class="p-4">
+                <!-- Order tracking content will be loaded here -->
+                <div class="text-center py-10">
+                    <i class="fas fa-spinner fa-spin text-3xl text-secondary"></i>
+                    <p class="mt-4 text-gray-600 dark:text-gray-300">Loading order details...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script>
+        // Get order ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('id');
+        
+        // Function to load order tracking details
+        async function loadOrderTracking() {
+            if (!orderId) {
+                document.getElementById('orderTrackingContainer').innerHTML = `
+                    <div class="text-center py-10">
+                        <i class="fas fa-exclamation-triangle text-3xl text-yellow-500"></i>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Order ID is missing</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                // For now, we'll use mock data
+                // In a real app, you would fetch from the API:
+                // const order = await ZaboxAPI.getOrderById(orderId);
+                
+                // Mock order data
+                const order = {
+                    _id: orderId,
+                    orderNumber: 'ZAB-' + orderId.slice(-3),
+                    status: 'picked',
+                    estimatedDeliveryTime: new Date(Date.now() + 20 * 60000), // 20 minutes from now
+                    items: [
+                        { name: 'Cheese Burger', quantity: 1, price: 65 },
+                        { name: 'Orange Juice', quantity: 2, price: 35 }
+                    ],
+                    totalAmount: 135,
+                    deliveryFee: 20,
+                    tax: 18.9,
+                    vendor: {
+                        name: 'Mahmoud Restaurant',
+                        address: '125 El-Gaish Road, Alexandria'
+                    },
+                    customer: {
+                        address: '14 Street 253, Smouha, Alexandria'
+                    },
+                    driver: {
+                        name: 'Mohammed Ali',
+                        rating: 4.9,
+                        totalDeliveries: 256,
+                        photo: 'https://randomuser.me/api/portraits/men/12.jpg'
+                    },
+                    timestamps: {
+                        placed: new Date(Date.now() - 30 * 60000), // 30 minutes ago
+                        confirmed: new Date(Date.now() - 25 * 60000), // 25 minutes ago
+                        preparing: new Date(Date.now() - 20 * 60000), // 20 minutes ago
+                        ready: new Date(Date.now() - 15 * 60000), // 15 minutes ago
+                        picked: new Date(Date.now() - 10 * 60000) // 10 minutes ago
+                    }
+                };
+                
+                renderOrderTracking(order);
+            } catch (error) {
+                console.error('Error loading order tracking:', error);
+                document.getElementById('orderTrackingContainer').innerHTML = `
+                    <div class="text-center py-10">
+                        <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">Failed to load order details: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Function to render order tracking details
+        function renderOrderTracking(order) {
+            const container = document.getElementById('orderTrackingContainer');
+            
+            // Format estimated delivery time
+            const estimatedTime = order.estimatedDeliveryTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            // Format timestamps
+            const formatTime = (date) => {
+                return date ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+            };
+            
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Order Summary -->
+                    <div>
+                        <p class="font-medium text-gray-500 dark:text-gray-300">ORDER SUMMARY</p>
+                        <div class="mt-2 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                            ${order.items.map(item => `
+                                <div class="flex justify-between items-center">
+                                    <p class="dark:text-white">${item.quantity}x ${item.name}</p>
+                                    <p class="text-secondary font-medium">EGP ${item.price * item.quantity}</p>
+                                </div>
+                            `).join('')}
+                            <div class="border-t border-gray-300 dark:border-gray-600 mt-3 pt-3 flex justify-between">
+                                <p class="dark:text-white">Total</p>
+                                <p class="text-secondary font-bold">EGP ${order.totalAmount}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Delivery Info -->
+                    <div>
+                        <p class="font-medium text-gray-500 dark:text-gray-300">DELIVERY INFORMATION</p>
+                        <div class="mt-2 space-y-3">
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i class="fas fa-store text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">${order.vendor.name}</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${order.vendor.address}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i class="fas fa-map-marker-alt text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Your Location</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${order.customer.address}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tracking Steps -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="font-medium text-gray-500 dark:text-gray-300">DELIVERY STATUS</p>
+                            <button class="text-secondary text-sm font-medium">Live Tracking</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Placed</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${formatTime(order.timestamps.placed)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Accepted</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${formatTime(order.timestamps.confirmed)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Preparing</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${formatTime(order.timestamps.preparing)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Ready</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${formatTime(order.timestamps.ready)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    ${order.status === 'picked' ? '<div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>' : ''}
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Driver Assigned</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${formatTime(order.timestamps.picked)}</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">${order.driver.name} is on the way to the restaurant</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full ${order.status === 'picked' ? 'bg-gray-300 dark:bg-gray-600' : 'bg-secondary'} flex items-center justify-center">
+                                        <i class="fas fa-biking ${order.status === 'picked' ? 'text-gray-500 dark:text-gray-400' : 'text-white'}"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Driver Picked Up</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">Expected: ${estimatedTime}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Driver Info -->
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg flex justify-between items-center">
+                        <div class="flex items-center">
+                            <img src="${order.driver.photo}" 
+                                alt="Driver" class="w-12 h-12 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="font-medium dark:text-white">${order.driver.name}</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
+                                    <span class="text-xs dark:text-gray-300">${order.driver.rating} (${order.driver.totalDeliveries} deliveries)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="bg-primary text-white p-2 rounded-full">
+                            <i class="fas fa-phone-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="w-full bg-secondary text-primary font-bold py-2 px-4 rounded-lg">
+                        View Live Tracking
+                    </button>
+                </div>
+            `;
+        }
+        
+        // Load order tracking when page loads
+        document.addEventListener('DOMContentLoaded', loadOrderTracking);
+    </script>
+</body>
+</html>

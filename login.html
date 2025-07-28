@@ -1,0 +1,135 @@
+<!-- zabox/login.html -->
+<!DOCTYPE html>
+<html lang="en" dir="auto" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Zabox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#000000',
+                            light: '#333333',
+                        },
+                        secondary: {
+                            DEFAULT: '#FFD700',
+                            light: '#FFE55C',
+                        },
+                    },
+                    fontFamily: {
+                        'sans': ['Cairo', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <div class="p-8">
+                <div class="text-center">
+                    <i class="fas fa-bolt text-secondary text-4xl mb-4"></i>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Welcome Back</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Sign in to your account</p>
+                </div>
+                
+                <form id="loginForm" class="mt-8 space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-secondary focus:border-transparent text-gray-900 dark:text-white"
+                            placeholder="you@example.com"
+                        >
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-secondary focus:border-transparent text-gray-900 dark:text-white"
+                            placeholder="••••••••"
+                        >
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input 
+                                id="remember-me" 
+                                name="remember-me" 
+                                type="checkbox" 
+                                class="h-4 w-4 text-secondary focus:ring-secondary border-gray-300 rounded"
+                            >
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-secondary hover:text-yellow-600">
+                                Forgot your password?
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button 
+                            type="submit" 
+                            class="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold py-3 px-4 rounded-lg transition duration-300"
+                        >
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Don't have an account? 
+                        <a href="register.html" class="font-medium text-secondary hover:text-yellow-600">
+                            Sign up
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script>
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const data = await ZaboxAPI.loginUser({ email, password });
+                console.log('Login successful:', data);
+                
+                // Save token
+                ZaboxAPI.setAuthToken(data.token);
+                
+                // Redirect to home page
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Login failed:', error);
+                alert('Login failed: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

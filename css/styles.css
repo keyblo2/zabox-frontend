@@ -1,0 +1,44 @@
+/* css/styles.css */
+
+/* Custom styles */
+.rtl-support {
+    direction: rtl;
+}
+.floating-action-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 50;
+}
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.vendor-card:hover {
+    transform: scale(1.02);
+}
+.language-switch {
+    transition: all 0.3s ease;
+}
+.slide-in {
+    animation: slideIn 0.3s forwards;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+.tab-active {
+    border-bottom: 3px solid #FFD700;
+    color: #FFD700;
+    font-weight: bold;
+}
+/* Dark mode overrides */
+.dark .dark\:bg-primary {
+    background-color: #111827;
+}
+.dark .dark\:text-secondary {
+    color: #FFD700;
+}
+.dark .dark\:border-primary {
+    border-color: #333;
+}

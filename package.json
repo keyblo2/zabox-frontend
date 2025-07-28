@@ -1,0 +1,17 @@
+{
+  "name": "zabox-frontend",
+  "version": "1.0.0",
+  "description": "Zabox Web Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s .",
+    "dev": "serve .",
+    "build": "echo 'Building frontend...'"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "MIT"
+}

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zabox - Smart Delivery | Egypt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#000000',
+                            light: '#333333',
+                        },
+                        secondary: {
+                            DEFAULT: '#FFD700',
+                            light: '#FFE55C',
+                        },
+                    },
+                    fontFamily: {
+                        'sans': ['Cairo', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <!-- App Container -->
+    <div class="max-w-md mx-auto bg-white dark:bg-primary min-h-screen relative overflow-hidden">
+        <!-- Header -->
+        <header class="bg-primary text-white p-4 shadow-md sticky top-0 z-40">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-bolt text-secondary text-2xl"></i>
+                    <h1 class="text-xl font-bold">ZABOX</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="language-switch text-sm bg-secondary text-primary px-3 py-1 rounded-full flex items-center">
+                        <span class="current-lang">EN</span>
+                        <i class="fas fa-exchange-alt ml-2"></i>
+                    </button>
+                    <button id="themeToggle" class="text-yellow-300">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                    <button id="profileBtn">
+                        <i class="fas fa-user-circle text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Search Bar -->
+            <div class="mt-4 relative">
+                <input type="text" id="searchInput" name="search" placeholder="Search vendors or products..." 
+                    class="w-full py-2 px-4 pr-10 rounded-full bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-secondary">
+                <button class="absolute right-3 top-2 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="pb-20">
+            <!-- Promo Banner -->
+            <div class="relative bg-gradient-to-r from-primary to-gray-800 text-white p-6 mx-4 mt-4 rounded-xl shadow-lg overflow-hidden">
+                <div class="relative z-10">
+                    <h3 class="text-lg font-semibold">Special Offer!</h3>
+                    <p class="text-sm mt-1">Get 20% off your first order with code WELCOME20</p>
+                    <button class="mt-2 bg-secondary text-primary px-4 py-1 rounded-full text-sm font-medium">Order Now</button>
+                </div>
+                <div class="absolute right-0 bottom-0 opacity-20">
+                    <i class="fas fa-gift text-8xl text-secondary"></i>
+                </div>
+            </div>
+            <!-- Categories -->
+            <section class="px-4 mt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold dark:text-white">Categories</h2>
+                    <button class="text-secondary text-sm">View All</button>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                    <!-- Category 1 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-utensils text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Restaurants</p>
+                    </div>
+                    <!-- Category 2 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-pills text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Pharmacies</p>
+                    </div>
+                    <!-- Category 3 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-shopping-basket text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Supermarkets</p>
+                    </div>
+                    <!-- Category 4 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-ice-cream text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Desserts</p>
+                    </div>
+                    <!-- Category 5 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Electronics</p>
+                    </div>
+                    <!-- Category 6 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-carrot text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Groceries</p>
+                    </div>
+                    <!-- Category 7 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-wine-glass-alt text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">Juice Shops</p>
+                    </div>
+                    <!-- Category 8 -->
+                    <div class="category-card bg-white dark:bg-gray-800 rounded-lg p-3 text-center shadow-md transition-transform cursor-pointer">
+                        <div class="bg-gray-100 dark:bg-gray-700 w-12 h-12 rounded-full mx-auto flex items-center justify-center">
+                            <i class="fas fa-ellipsis-h text-secondary text-xl"></i>
+                        </div>
+                        <p class="text-xs mt-1 font-medium dark:text-white">More</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Top Vendors -->
+            <section class="px-4 mt-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold dark:text-white">Top Vendors</h2>
+                    <button class="text-secondary text-sm">View All</button>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Vendor 1 -->
+                    <div class="vendor-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-transform">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Restaurant" class="w-full h-32 object-cover">
+                            <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                                <i class="fas fa-star text-yellow 400 mr-1"></i>
+                                4.5
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold dark:text-white">Mahmoud Restaurant</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-gray-500 dark:text-gray-300 flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> 35-45 min
+                                </span>
+                                <span class="text-xs font-medium text-secondary">EGP 20 Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vendor 2 -->
+                    <div class="vendor-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-transform">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1606787366850-4f5a843f30a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Pharmacy" class="w-full h-32 object-cover">
+                            <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                4.8
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold dark:text-white">Al-Ezaby Pharmacy</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-gray-500 dark:text-gray-300 flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> 20-30 min
+                                </span>
+                                <span class="text-xs font-medium text-secondary">EGP 15 Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vendor 3 -->
+                    <div class="vendor-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-transform">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Electronics" class="w-full h-32 object-cover">
+                            <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                4.3
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold dark:text-white">TechZone Electronics</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-gray-500 dark:text-gray-300 flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> 45-60 min
+                                </span>
+                                <span class="text-xs font-medium text-secondary">EGP 30 Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Vendor 4 -->
+                    <div class="vendor-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-transform">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Bakery" class="w-full h-32 object-cover">
+                            <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                4.7
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold dark:text-white">The Sweet Corner</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-xs text-gray-500 dark:text-gray-300 flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> 20-30 min
+                                </span>
+                                <span class="text-xs font-medium text-secondary">EGP 15 Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Special Offers -->
+            <section class="px-4 mt-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold dark:text-white">Special Offers</h2>
+                    <button class="text-secondary text-sm">View All</button>
+                </div>
+                <div class="relative h-40 bg-gradient-to-r from-primary to-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <div class="absolute inset-0 bg-black opacity-40"></div>
+                    <div class="relative z-10 p-5 h-full flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-white">30% OFF</h3>
+                        <p class="text-white text-sm mt-1">On all juice orders from JuicyLand</p>
+                        <button class="mt-3 bg-secondary text-primary text-xs font-bold px-4 py-1 rounded-full self-start">Use Code: JUICY30</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700 flex justify-around py-3 px-4 z-30">
+            <button class="flex flex-col items-center text-secondary">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Home</span>
+            </button>
+            <button class="flex flex-col items-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-search text-xl"></i>
+                <span class="text-xs mt-1">Explore</span>
+            </button>
+            <button class="flex flex-col items-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-shopping-bag text-xl"></i>
+                <span class="text-xs mt-1">Orders</span>
+            </button>
+            <button class="flex flex-col items-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">Profile</span>
+            </button>
+        </nav>
+        <!-- Side Menu (Hidden by default) -->
+        <div id="sideMenu" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+            <div class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user-circle text-3xl text-secondary"></i>
+                    <div>
+                        <h3 class="font-medium dark:text-white">Mohamed Ahmed</h3>
+                        <span class="text-xs text-gray-500 dark:text-gray-300">Customer Account</span>
+                    </div>
+                </div>
+                <button id="closeMenuBtn" class="text-gray-500">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4 space-y-4">
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-shopping-bag text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">My Orders</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-heart text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Favorites</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-map-marker-alt text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Addresses</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-wallet text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Payment Methods</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-percent text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Promotions</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-headset text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Support</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-cog text-secondary w-6 text-center"></i>
+                    <span class="dark:text-white">Settings</span>
+                </a>
+                <button class="w-full mt-8 bg-secondary text-primary font-bold py-2 px-4 rounded-lg">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+        <!-- Floating Action Button -->
+        <button id="cartBtn" class="floating-action-btn bg-secondary text-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <span class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">3</span>
+        </button>
+        <!-- Cart Modal (Hidden by default) -->
+        <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-gray-800 rounded-t-3xl max-h-[80vh] overflow-y-auto transform transition-transform duration-300">
+                <div class="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                    <h3 class="text-lg font-bold dark:text-white">Your Cart (3)</h3>
+                    <button id="closeCartBtn" class="text-gray-500">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="p-4 space-y-4">
+                    <!-- Cart Item 1 -->
+                    <div class="flex justify-between items-start border-b border-gray-200 dark:border-gray-700 pb-4">
+                        <div class="flex space-x-3">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Burger" class="w-14 h-14 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-medium dark:text-white">Cheese Burger</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">Mahmoud Restaurant</p>
+                                <p class="text-secondary text-sm font-medium">EGP 65</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="text-sm dark:text-white">1</span>
+                            <button class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Cart Item 2 -->
+                    <div class="flex justify-between items-start border-b border-gray-200 dark:border-gray-700 pb-4">
+                        <div class="flex space-x-3">
+                            <img src="https://images.unsplash.com/photo-1573821201066-d53c81a5f0c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                                alt="Juice" class="w-14 h-14 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-medium dark:text-white">Orange Juice</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">JuicyLand</p>
+                                <p class="text-secondary text-sm font-medium">EGP 35</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="text-sm dark:text-white">2</span>
+                            <button class="w-6 h-6 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Summary -->
+                    <div class="space-y-2 border-b border-gray-200 dark:border-gray-700 pb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 dark:text-gray-300">Subtotal</span>
+                            <span class="font-medium dark:text-white">EGP 135</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 dark:text-gray-300">Delivery Fee</span>
+                            <span class="font-medium dark:text-white">EGP 20</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 dark:text-gray-300">Tax (14%)</span>
+                            <span class="font-medium dark:text-white">EGP 18.9</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 dark:text-gray-300 text-sm">Total</p>
+                            <p class="text-xl font-bold dark:text-white">EGP 173.9</p>
+                        </div>
+                        <button class="bg-secondary text-primary font-bold py-2 px-6 rounded-lg">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Order Tracking Modal (Hidden by default) -->
+        <div id="trackingModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-gray-800 rounded-t-3xl max-h-[90vh] overflow-y-auto transform transition-transform duration-300">
+                <div class="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold dark:text-white">Order #ZAB-254</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-300">Estimated: 25 min remaining</p>
+                    </div>
+                    <button id="closeTrackingBtn" class="text-gray-500">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="p-4 space-y-6">
+                    <!-- Order Summary -->
+                    <div>
+                        <p class="font-medium text-gray-500 dark:text-gray-300">ORDER SUMMARY</p>
+                        <div class="mt-2 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                            <div class="flex justify-between items-center">
+                                <p class="dark:text-white">1x Cheese Burger</p>
+                                <p class="text-secondary font-medium">EGP 65</p>
+                            </div>
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="dark:text-white">2x Orange Juice</p>
+                                <p class="text-secondary font-medium">EGP 70</p>
+                            </div>
+                            <div class="border-t border-gray-300 dark:border-gray-600 mt-3 pt-3 flex justify-between">
+                                <p class="dark:text-white">Total</p>
+                                <p class="text-secondary font-bold">EGP 135</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Delivery Info -->
+                    <div>
+                        <p class="font-medium text-gray-500 dark:text-gray-300">DELIVERY INFORMATION</p>
+                        <div class="mt-2 space-y-3">
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i class="fas fa-store text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Mahmoud Restaurant</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">125 El-Gaish Road, Alexandria</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i class="fas fa-map-marker-alt text-secondary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Your Location</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">14 Street 253, Smouha, Alexandria</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tracking Steps -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="font-medium text-gray-500 dark:text-gray-300">DELIVERY STATUS</p>
+                            <button class="text-secondary text-sm font-medium">Live Tracking</button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Placed</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">12:05 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Order Accepted</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">12:10 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                    <div class="absolute left-1/2 -translate-x-1/2 h-10 w-0.5 bg-gray-300 dark:bg-gray-600 mt-2"></div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Driver Assigned</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">12:15 PM</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">Mohammed Ali is on the way to the restaurant</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="relative mr-3">
+                                    <div class="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                                        <i class="fas fa-biking text-gray-500 dark:text-gray-400"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium dark:text-white">Driver Picked Up</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-300">Expected: 12:35-12:45 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Driver Info -->
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg flex justify-between items-center">
+                        <div class="flex items-center">
+                            <img src="https://randomuser.me/api/portraits/men/12.jpg" 
+                                alt="Driver" class="w-12 h-12 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="font-medium dark:text-white">Mohammed Ali</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
+                                    <span class="text-xs dark:text-gray-300">4.9 (256 deliveries)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="bg-primary text-white p-2 rounded-full">
+                            <i class="fas fa-phone-alt"></i>
+                        </button>
+                    </div>
+                    <button class="w-full bg-secondary text-primary font-bold py-2 px-4 rounded-lg">
+                        View Live Tracking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
